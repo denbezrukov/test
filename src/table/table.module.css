@@ -1,0 +1,19 @@
+.dragger {
+    width: 10px;
+    background: gray;
+    margin: 0 5px;
+    cursor: col-resize;
+}
+
+.row {
+    display: flex;
+    overflow: hidden;
+}
+
+.column {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
