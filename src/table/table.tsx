@@ -1,4 +1,5 @@
 import { memo, ReactNode, Children, FC, useState, useCallback } from 'react';
+import classNames from 'classnames';
 import { Point, useDrag } from '../_hooks/useDrag';
 import { normalizePercent } from '../_helpers/normalizePercent';
 
@@ -27,12 +28,15 @@ const TableComponent: FC<TableProps> = props => {
 
     const [left, right] = Children.toArray(children);
 
+    const classes = classNames(styles.row, {
+        [styles.nonUserSelect]: isDragging,
+    });
+
     return (
         <div
-            className={styles.row}
+            className={classes}
             style={{
                 width: totalWidth,
-                userSelect: isDragging ? 'none' : 'auto',
             }}
         >
             <div
