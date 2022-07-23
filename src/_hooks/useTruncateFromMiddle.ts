@@ -27,26 +27,26 @@ export const useTruncateFromMiddle = (props: UseTruncateFromMiddleProps) => {
         let prefix = '';
         let suffix = '';
 
-        let i = 0;
-        let j = text.length - 1;
+        let left = 0;
+        let right = text.length - 1;
         let current = middleChars;
         let prev = current;
 
-        while (i < j) {
-            prefix += text[i];
+        while (left < right) {
+            prefix += text[left];
             current = prefix + middleChars + suffix;
             if (context.measureText(current).width >= width) {
                 return prev;
             }
             prev = current;
-            suffix = text[j] + suffix;
+            suffix = text[right] + suffix;
             current = prefix + middleChars + suffix;
             if (context.measureText(current).width >= width) {
                 return prev;
             }
             prev = current;
-            i += 1;
-            j -= 1;
+            left += 1;
+            right -= 1;
         }
         return text;
     }, [width, text, font]);
