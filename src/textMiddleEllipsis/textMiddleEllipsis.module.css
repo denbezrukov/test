@@ -1,0 +1,5 @@
+.container {
+    white-space: nowrap;
+    overflow: hidden;
+    word-wrap: normal;
+}

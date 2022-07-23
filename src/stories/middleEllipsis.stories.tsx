@@ -21,7 +21,10 @@ const MiddleEllipsisComponent = (props: Props) => {
                 <>
                     {data.map(key => {
                         return (
-                            <TextMiddleEllipsis key={key}>
+                            <TextMiddleEllipsis
+                                className={styles.left}
+                                key={key}
+                            >
                                 {leftText}
                             </TextMiddleEllipsis>
                         );
@@ -30,7 +33,10 @@ const MiddleEllipsisComponent = (props: Props) => {
                 <>
                     {data.map(key => {
                         return (
-                            <TextMiddleEllipsis key={key}>
+                            <TextMiddleEllipsis
+                                className={styles.right}
+                                key={key}
+                            >
                                 {rightText}
                             </TextMiddleEllipsis>
                         );

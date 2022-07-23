@@ -6,10 +6,10 @@
     align-items: center;
 }
 
-.left {
+.odd {
     color: gray;
 }
 
-.right {
+.even {
     color: mediumpurple;
 }

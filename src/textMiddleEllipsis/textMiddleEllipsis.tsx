@@ -1,14 +1,18 @@
 import { FC, memo, useCallback, useMemo, useRef, useState } from 'react';
+import classNames from 'classnames';
 import { useResizeObserver } from '../_hooks/useResizeObserver';
 import { useTruncateFromMiddle } from '../_hooks/useTruncateFromMiddle';
 import { useIsomorphicLayoutEffect } from '../_hooks/useIsomorphicLayoutEffect';
 
+import styles from './textMiddleEllipsis.module.css';
+
 interface TextEllipsisProps {
     children: string;
+    className?: string;
 }
 
 const TextMiddleEllipsisComponent: FC<TextEllipsisProps> = props => {
-    const { children } = props;
+    const { children, className } = props;
     const containerRef = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(0);
     const [font, setFont] = useState('');
@@ -45,14 +49,10 @@ const TextMiddleEllipsisComponent: FC<TextEllipsisProps> = props => {
         font,
     });
 
+    const classes = classNames(styles.container, className);
+
     return (
-        <div
-            style={{
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-            }}
-            ref={containerRef}
-        >
+        <div className={classes} ref={containerRef}>
             {truncatedText}
         </div>
     );

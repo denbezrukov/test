@@ -24,7 +24,9 @@ const TailLengthComponent = (props: Props) => {
                         return (
                             <TextEllipsis
                                 key={key}
-                                className={styles.left}
+                                className={
+                                    key % 2 === 0 ? styles.even : styles.odd
+                                }
                                 tailLength={tailLength}
                             >
                                 {leftText}
@@ -37,7 +39,9 @@ const TailLengthComponent = (props: Props) => {
                         return (
                             <TextEllipsis
                                 key={key}
-                                className={styles.right}
+                                className={
+                                    key % 2 === 0 ? styles.odd : styles.even
+                                }
                                 tailLength={tailLength}
                             >
                                 {rightText}

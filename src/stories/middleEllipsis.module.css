@@ -5,3 +5,11 @@
     justify-content: center;
     align-items: center;
 }
+
+.left {
+    color: gray;
+}
+
+.right {
+    color: mediumpurple;
+}
