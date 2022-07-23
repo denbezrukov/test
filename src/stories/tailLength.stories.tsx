@@ -22,7 +22,11 @@ const TailLengthComponent = (props: Props) => {
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis key={key} tailLength={tailLength}>
+                            <TextEllipsis
+                                key={key}
+                                className={styles.left}
+                                tailLength={tailLength}
+                            >
                                 {leftText}
                             </TextEllipsis>
                         );
@@ -31,7 +35,11 @@ const TailLengthComponent = (props: Props) => {
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis key={key} tailLength={tailLength}>
+                            <TextEllipsis
+                                key={key}
+                                className={styles.right}
+                                tailLength={tailLength}
+                            >
                                 {rightText}
                             </TextEllipsis>
                         );
