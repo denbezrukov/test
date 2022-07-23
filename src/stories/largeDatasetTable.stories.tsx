@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Table } from '../table/table';
 import { TextEllipsis } from '../textEllipsis/textEllipsis';

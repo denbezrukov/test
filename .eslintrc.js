@@ -38,5 +38,9 @@ module.exports = {
         'react/jsx-props-no-spreading': 'off',
         'react/require-default-props': 'off',
         'jsx-a11y/no-static-element-interactions': 'off',
+        'import/no-extraneous-dependencies': [
+            'error',
+            { devDependencies: ['**/*.stories.tsx'] },
+        ],
     },
 };

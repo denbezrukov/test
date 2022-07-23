@@ -1,42 +1,53 @@
-import {useMemo, useState} from 'react';
-import { useFitCharacterNumber } from './useFitCharacterNumber';
-import { truncateFromMiddle } from './truncateFromMiddle';
-import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
-import useTextWidth from './useTextWidth';
+import { useMemo } from 'react';
+import { getDummyContext } from '../_helpers/getDummyContext';
 
-interface Options {
-    originalText: string;
-    tailLength: number;
+interface UseTruncateFromMiddleProps {
+    text: string;
+    width: number;
+    font: string;
 }
-const useTruncateFromMiddle = ({ originalText, tailLength }: Options) => {
-    const contentWidth = 100;
-    const textWidth = useTextWidth(originalText);
+export const useTruncateFromMiddle = (props: UseTruncateFromMiddleProps) => {
+    const { text, width, font } = props;
 
-    const fitLength = useFitCharacterNumber({
-        originalText,
-        maxWidth: contentWidth,
-        tailLength,
-    });
+    return useMemo(() => {
+        const context = getDummyContext();
+        if (!context) {
+            return text;
+        }
 
-    const truncatedText = useMemo(() => {
-        return originalText.substring(0, fitLength) + '...' + originalText.substring(fitLength);
-    }, [fitLength, originalText]);
+        const textWidth = context.measureText(text).width;
 
-    // useIsomorphicLayoutEffect(() => {
-    //     if (elWidth && charNumber && textWidth) {
-    //         if (textWidth > elWidth) {
-    //             setResult(truncateFromMiddle(originalText, charNumber));
-    //         } else {
-    //             setResult(originalText);
-    //         }
-    //     }
-    // }, [elWidth, charNumber, textWidth, originalText]);
+        if (textWidth <= width) {
+            return text;
+        }
 
-    return {
-        truncatedText,
-        contentWidth,
-        textWidth,
-    };
+        const middleChars = '...';
+
+        context.font = font;
+        let prefix = '';
+        let suffix = '';
+
+        let i = 0;
+        let j = text.length - 1;
+        let current = middleChars;
+        let prev = current;
+
+        while (i < j) {
+            prefix += text[i];
+            current = prefix + middleChars + suffix;
+            if (context.measureText(current).width >= width) {
+                return prev;
+            }
+            prev = current;
+            suffix = text[j] + suffix;
+            current = prefix + middleChars + suffix;
+            if (context.measureText(current).width >= width) {
+                return prev;
+            }
+            prev = current;
+            i += 1;
+            j -= 1;
+        }
+        return text;
+    }, [width, text, font]);
 };
-
-export default useTruncateFromMiddle;

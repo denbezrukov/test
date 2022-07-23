@@ -1,20 +1,19 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Table } from '../table/table';
-import { TextEllipsis } from '../textEllipsis/textEllipsis';
 
-import styles from './tailLength.module.css';
+import styles from './middleEllipsis.module.css';
+import { TextMiddleEllipsis } from '../textMiddleEllipsis/textMiddleEllipsis';
 
 interface Props {
     leftText: string;
     rightText: string;
-    tailLength: number;
 }
 const data = Array(20)
     .fill(1)
     .map((_, index) => index);
 
-const TailLengthComponent = (props: Props) => {
-    const { tailLength, leftText, rightText } = props;
+const MiddleEllipsisComponent = (props: Props) => {
+    const { leftText, rightText } = props;
 
     return (
         <div className={styles.container}>
@@ -22,18 +21,18 @@ const TailLengthComponent = (props: Props) => {
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis key={key} tailLength={tailLength}>
+                            <TextMiddleEllipsis key={key}>
                                 {leftText}
-                            </TextEllipsis>
+                            </TextMiddleEllipsis>
                         );
                     })}
                 </>
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis key={key} tailLength={tailLength}>
+                            <TextMiddleEllipsis key={key}>
                                 {rightText}
-                            </TextEllipsis>
+                            </TextMiddleEllipsis>
                         );
                     })}
                 </>
@@ -43,19 +42,18 @@ const TailLengthComponent = (props: Props) => {
 };
 
 export default {
-    title: 'Example/TailLength',
-    component: TailLengthComponent,
-} as ComponentMeta<typeof TailLengthComponent>;
+    title: 'Example/MiddleEllipsis',
+    component: MiddleEllipsisComponent,
+} as ComponentMeta<typeof MiddleEllipsisComponent>;
 
-const Template: ComponentStory<typeof TailLengthComponent> = args => (
-    <TailLengthComponent {...args} />
+const Template: ComponentStory<typeof MiddleEllipsisComponent> = args => (
+    <MiddleEllipsisComponent {...args} />
 );
 
-export const TailLength = Template.bind({});
-TailLength.args = {
+export const MiddleEllipsis = Template.bind({});
+MiddleEllipsis.args = {
     leftText:
         'Loremipsumdolorsitamet,consecteturadipiscingelit.Nullaultricies.',
     rightText:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies.',
-    tailLength: 20,
 };
