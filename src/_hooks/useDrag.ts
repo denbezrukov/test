@@ -2,10 +2,10 @@ import {
     useCallback,
     useRef,
     useState,
-    useLayoutEffect,
     MouseEvent as ReactMouseEvent,
 } from 'react';
 import { rafDebounce } from '../_helpers/rafDebounce';
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 export interface Point {
     x: number;
@@ -78,7 +78,7 @@ export const useDrag = (onDrag: (delta: Point) => void) => {
         [setIsDragging, onDragRef, currentHandlers],
     );
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         return () => {
             const handlers = currentHandlers.current;
             if (handlers) {
