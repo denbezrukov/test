@@ -7,9 +7,10 @@ const useTextWidth = (originalText: string) => {
 
         if (context) {
             context.font = `18px/18px Arial, sans-serif`;
-            return context.measureText(originalText).width; // width of text
+            return context.measureText(originalText).width;
         }
-        return undefined;
+
+        return 0;
     }, [originalText]);
 };
 

@@ -17,31 +17,31 @@ export const useFitCharacterNumber = ({
         const middleChars = '...';
 
         context.font = `18px/18px Arial, sans-serif`;
-        let fitLength: number = originalText.length;
-        let prefix = ''; // char from start
-        let suffix = ''; // char from end
+        let fitLength = originalText.length;
+        let prefix = '';
+        let suffix = '';
+
         let i = 0;
         let j = fitLength - 1;
-        let current = middleChars || '...'; // i.e. '...'
+        let current = middleChars;
         let prev = current;
+
         while (i < j) {
             prefix += originalText.charAt(i);
             current = prefix + middleChars + suffix;
             if (context.measureText(current).width > maxWidth) {
-                fitLength = prev.length;
-                break;
+                return prev.length;
             }
             prev = current;
             suffix = originalText.charAt(j) + suffix;
             current = prefix + middleChars + suffix;
             if (context.measureText(current).width > maxWidth) {
-                fitLength = prev.length;
-                break;
+                return prev.length;
             }
             prev = current;
             i++;
             j--;
         }
-        return { charNumber: fitLength };
+        return fitLength;
     }, [maxWidth, tailLength, originalText]);
 };

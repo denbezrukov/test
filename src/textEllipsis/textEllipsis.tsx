@@ -81,10 +81,10 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
         state.staticSize.scrollWidth > state.staticSize.clientWidth;
 
     const { ellipsisText, staticText } = useMemo(() => {
-        const splitIndex = Math.max(0, children.length - tailLength);
+        const splitIndex = children.length - tailLength;
         return {
-            ellipsisText: children.slice(0, splitIndex),
-            staticText: children.slice(splitIndex),
+            ellipsisText: children.substring(0, splitIndex),
+            staticText: children.substring(splitIndex),
         };
     }, [children, tailLength]);
 
