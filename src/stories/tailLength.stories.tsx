@@ -8,13 +8,14 @@ interface Props {
     leftText: string;
     rightText: string;
     tailLength: number;
+    title: string;
 }
 const data = Array(20)
     .fill(1)
     .map((_, index) => index);
 
 const TailLengthComponent = (props: Props) => {
-    const { tailLength, leftText, rightText } = props;
+    const { tailLength, leftText, rightText, title } = props;
 
     return (
         <div className={styles.container}>
@@ -28,6 +29,7 @@ const TailLengthComponent = (props: Props) => {
                                     key % 2 === 0 ? styles.even : styles.odd
                                 }
                                 tailLength={tailLength}
+                                title={title}
                             >
                                 {leftText}
                             </TextEllipsis>
@@ -43,6 +45,7 @@ const TailLengthComponent = (props: Props) => {
                                     key % 2 === 0 ? styles.odd : styles.even
                                 }
                                 tailLength={tailLength}
+                                title={title}
                             >
                                 {rightText}
                             </TextEllipsis>
@@ -70,4 +73,5 @@ TailLength.args = {
     rightText:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies.',
     tailLength: 20,
+    title: '',
 };
