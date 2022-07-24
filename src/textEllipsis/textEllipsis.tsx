@@ -37,20 +37,33 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
 
     return (
         <div
-            onMouseEnter={onMouseEnter}
+            data-testid="text-ellipsis"
             className={classes}
             title={isTitleShown ? title ?? children : undefined}
+            onMouseEnter={onMouseEnter}
         >
             <div className={styles.innerContainer}>
-                <div
-                    className={classNames(styles.head, styles.ellipsis)}
-                    ref={headRef}
-                >
-                    {headText}
-                </div>
-                <div className={classNames(styles.tail, styles.ellipsis)}>
-                    {tailText}
-                </div>
+                {
+                    headText && (
+                        <div
+                            data-testid="text-ellipsis-head"
+                            className={classNames(styles.head, styles.ellipsis)}
+                            ref={headRef}
+                        >
+                            {headText}
+                        </div>
+                    )
+                }
+                {
+                    tailText && (
+                        <div
+                            data-testid="text-ellipsis-tail"
+                            className={classNames(styles.tail, styles.ellipsis)}
+                        >
+                            {tailText}
+                        </div>
+                    )
+                }
             </div>
         </div>
     );
