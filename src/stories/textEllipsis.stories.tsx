@@ -1,8 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Table } from '../table/table';
 
-import styles from './tailLength.module.css';
-import { TextEllipsis } from '../textEllipsis/textEllipsis';
+import styles from './textEllipsis.module.css';
+import { TextEllipsis as Text } from '../textEllipsis/textEllipsis';
 
 interface Props {
     leftText: string;
@@ -14,7 +14,7 @@ const data = Array(20)
     .fill(1)
     .map((_, index) => index);
 
-const TailLengthComponent = (props: Props) => {
+const TextEllipsisComponent = (props: Props) => {
     const { tailLength, leftText, rightText, title } = props;
 
     return (
@@ -23,7 +23,7 @@ const TailLengthComponent = (props: Props) => {
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis
+                            <Text
                                 key={key}
                                 className={
                                     key % 2 === 0 ? styles.even : styles.odd
@@ -32,14 +32,14 @@ const TailLengthComponent = (props: Props) => {
                                 title={title}
                             >
                                 {leftText}
-                            </TextEllipsis>
+                            </Text>
                         );
                     })}
                 </>
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis
+                            <Text
                                 key={key}
                                 className={
                                     key % 2 === 0 ? styles.odd : styles.even
@@ -48,7 +48,7 @@ const TailLengthComponent = (props: Props) => {
                                 title={title}
                             >
                                 {rightText}
-                            </TextEllipsis>
+                            </Text>
                         );
                     })}
                 </>
@@ -58,16 +58,16 @@ const TailLengthComponent = (props: Props) => {
 };
 
 export default {
-    title: 'Example/TailLength',
-    component: TailLengthComponent,
-} as ComponentMeta<typeof TailLengthComponent>;
+    title: 'Example/TextEllipsis',
+    component: TextEllipsisComponent,
+} as ComponentMeta<typeof TextEllipsisComponent>;
 
-const Template: ComponentStory<typeof TailLengthComponent> = args => (
-    <TailLengthComponent {...args} />
+const Template: ComponentStory<typeof TextEllipsisComponent> = args => (
+    <TextEllipsisComponent {...args} />
 );
 
-export const TailLength = Template.bind({});
-TailLength.args = {
+export const TextEllipsis = Template.bind({});
+TextEllipsis.args = {
     leftText:
         'Loremipsumdolorsitamet,consecteturadipiscingelit.Nullaultricies.',
     rightText:
