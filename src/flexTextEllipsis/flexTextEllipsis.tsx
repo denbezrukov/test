@@ -1,4 +1,4 @@
-import { FC, memo, useMemo } from 'react';
+import { FC, memo, useCallback, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 import styles from './flexTextEllipsis.module.css';
@@ -13,6 +13,18 @@ export interface FlexTextEllipsisProps {
 const FlexTextEllipsisComponent: FC<FlexTextEllipsisProps> = props => {
     const { children, tailLength, title, className } = props;
 
+    const [isTitleShown, setTitleShown] = useState(false);
+
+    const headRef = useRef<HTMLDivElement>(null);
+
+    const onMouseEnter = () => {
+        const headNode = headRef.current;
+
+        if (headNode) {
+            setTitleShown(headNode.clientWidth < headNode.scrollWidth);
+        }
+    };
+
     const { headText, tailText } = useMemo(() => {
         const splitIndex = children.length - tailLength;
         return {
@@ -24,9 +36,16 @@ const FlexTextEllipsisComponent: FC<FlexTextEllipsisProps> = props => {
     const classes = classNames(className, styles.container);
 
     return (
-        <div className={classes} title={title}>
+        <div
+            onMouseEnter={onMouseEnter}
+            className={classes}
+            title={isTitleShown ? title ?? children : undefined}
+        >
             <div className={styles.innerContainer}>
-                <div className={classNames(styles.head, styles.ellipsis)}>
+                <div
+                    className={classNames(styles.head, styles.ellipsis)}
+                    ref={headRef}
+                >
                     {headText}
                 </div>
                 <div className={classNames(styles.tail, styles.ellipsis)}>

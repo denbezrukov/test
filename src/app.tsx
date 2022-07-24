@@ -19,7 +19,7 @@ export const App = () => {
                 <>
                     {data.map(key => {
                         return (
-                            <FlexTextEllipsis key={key} tailLength={10}>
+                            <FlexTextEllipsis key={key} tailLength={17}>
                                 {longTextWithoutSpaces}
                             </FlexTextEllipsis>
                         );
@@ -28,7 +28,7 @@ export const App = () => {
                 <>
                     {data.map(key => {
                         return (
-                            <FlexTextEllipsis key={key} tailLength={10}>
+                            <FlexTextEllipsis key={key} tailLength={17}>
                                 {longTextWithSpaces}
                             </FlexTextEllipsis>
                         );
