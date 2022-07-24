@@ -16,13 +16,18 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
     const [isTitleShown, setTitleShown] = useState(false);
 
     const headRef = useRef<HTMLDivElement>(null);
+    const tailRef = useRef<HTMLDivElement>(null);
 
     const onMouseEnter = useCallback(() => {
         const headNode = headRef.current;
+        const tailNode = headRef.current;
 
-        if (headNode) {
-            setTitleShown(headNode.clientWidth < headNode.scrollWidth);
-        }
+        const isHeadOverflow =
+            headNode && headNode.clientWidth < headNode.scrollWidth;
+        const isTailOverflow =
+            tailNode && tailNode.clientWidth < tailNode.scrollWidth;
+
+        setTitleShown(isHeadOverflow || isTailOverflow);
     }, []);
 
     const { headText, tailText } = useMemo(() => {
@@ -56,6 +61,7 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
                     <div
                         data-testid="text-ellipsis-tail"
                         className={classNames(styles.tail, styles.ellipsis)}
+                        ref={tailRef}
                     >
                         {tailText}
                     </div>
