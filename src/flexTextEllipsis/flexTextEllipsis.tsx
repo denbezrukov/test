@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useMemo, useRef, useState } from 'react';
+import { FC, memo, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 import styles from './flexTextEllipsis.module.css';
