@@ -40,7 +40,13 @@ module.exports = {
         'jsx-a11y/no-static-element-interactions': 'off',
         'import/no-extraneous-dependencies': [
             'error',
-            { devDependencies: ['**/*.stories.tsx'] },
+            {
+                devDependencies: [
+                    '**/*.stories.tsx',
+                    '**/*.test.tsx',
+                    '**/*/setupTests.ts',
+                ],
+            },
         ],
     },
 };
