@@ -8,10 +8,10 @@ describe('TextEllipsis', () => {
         const textElement = screen.getByTestId('text-ellipsis');
 
         expect(textElement).toBeInTheDocument();
-        expect(textElement).toHaveTextContent('some text');
+        expect(textElement).toHaveTextContent(/^some text$/);
     });
 
-    test('should use passed className and combine it with container class', () => {
+    test('should use passed className', () => {
         render(
             <TextEllipsis className="my-class-name" tailLength={10}>
                 some text
@@ -20,31 +20,31 @@ describe('TextEllipsis', () => {
         const textElement = screen.getByTestId('text-ellipsis');
 
         expect(textElement).toBeInTheDocument();
-        expect(textElement).toHaveAttribute('class', 'my-class-name container');
+        expect(textElement).toHaveClass('my-class-name');
     });
 
     test('should split text into two parts by tailLength', async () => {
         const { rerender } = render(
-            <TextEllipsis tailLength={3}>this is long text</TextEllipsis>,
+            <TextEllipsis tailLength={3}>123456789</TextEllipsis>,
         );
         const headElement = screen.getByTestId('text-ellipsis-head');
         const tailElement = screen.getByTestId('text-ellipsis-tail');
 
         expect(headElement).toBeInTheDocument();
-        expect(headElement).toHaveTextContent('this is long t');
+        expect(headElement).toHaveTextContent(/^123456$/);
 
         expect(tailElement).toBeInTheDocument();
-        expect(tailElement).toHaveTextContent('ext');
+        expect(tailElement).toHaveTextContent(/^789$/);
 
         rerender(
-            <TextEllipsis tailLength={10}>this is long text</TextEllipsis>,
+            <TextEllipsis tailLength={10}>1234567891011</TextEllipsis>,
         );
 
         expect(headElement).toBeInTheDocument();
-        expect(headElement).toHaveTextContent('this is');
+        expect(headElement).toHaveTextContent(/^123$/);
 
         expect(tailElement).toBeInTheDocument();
-        expect(tailElement).toHaveTextContent('long text');
+        expect(tailElement).toHaveTextContent(/^4567891011$/);
     });
 
     test('should have only head if tail length is 0', async () => {
@@ -56,7 +56,7 @@ describe('TextEllipsis', () => {
 
         expect(tailElement).not.toBeInTheDocument();
         expect(headElement).toBeInTheDocument();
-        expect(headElement).toHaveTextContent('this is long text');
+        expect(headElement).toHaveTextContent(/^this is long text$/);
     });
 
     test('should have only tail if tail length is greater than text', async () => {
@@ -68,6 +68,6 @@ describe('TextEllipsis', () => {
 
         expect(headElement).not.toBeInTheDocument();
         expect(tailElement).toBeInTheDocument();
-        expect(tailElement).toHaveTextContent('this is long text');
+        expect(tailElement).toHaveTextContent(/^this is long text$/);
     });
 });
