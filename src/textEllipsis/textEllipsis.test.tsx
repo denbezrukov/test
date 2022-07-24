@@ -45,21 +45,29 @@ describe('TextEllipsis', () => {
 
         expect(tailElement).toBeInTheDocument();
         expect(tailElement).toHaveTextContent('long text');
+    });
 
-        rerender(<TextEllipsis tailLength={0}>this is long text</TextEllipsis>);
+    test('should have only head if tail length is 0', async () => {
+        render(
+            <TextEllipsis tailLength={0}>this is long text</TextEllipsis>,
+        );
+        const headElement = screen.getByTestId('text-ellipsis-head');
+        const tailElement = screen.queryByTestId('text-ellipsis-tail');
 
+        expect(tailElement).not.toBeInTheDocument();
         expect(headElement).toBeInTheDocument();
         expect(headElement).toHaveTextContent('this is long text');
+    });
 
-        expect(tailElement).not.toBeInTheDocument();
-
-        rerender(
+    test('should have only tail if tail length is greater than text', async () => {
+        render(
             <TextEllipsis tailLength={100}>this is long text</TextEllipsis>,
         );
+        const headElement = screen.queryByTestId('text-ellipsis-head');
+        const tailElement = screen.getByTestId('text-ellipsis-tail');
 
         expect(headElement).not.toBeInTheDocument();
-
-        expect(tailElement).not.toBeInTheDocument();
-        expect(headElement).toHaveTextContent('this is long text');
+        expect(tailElement).toBeInTheDocument();
+        expect(tailElement).toHaveTextContent('this is long text');
     });
 });
