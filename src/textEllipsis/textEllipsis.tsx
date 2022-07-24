@@ -1,117 +1,57 @@
-import classNames from 'classnames';
 import { FC, memo, useCallback, useMemo, useRef, useState } from 'react';
-import { useResizeObserver } from '../_hooks/useResizeObserver';
+import classNames from 'classnames';
 
 import styles from './textEllipsis.module.css';
 
-interface TextEllipsisProps {
+export interface TextEllipsisProps {
     children: string;
     tailLength: number;
     title?: string;
     className?: string;
 }
 
-interface NodeSize {
-    scrollWidth: number;
-    clientWidth: number;
-}
-
-const initialNodeSize: NodeSize = {
-    scrollWidth: 0,
-    clientWidth: 0,
-};
-
-interface TextEllipsisState {
-    containerSize: NodeSize;
-    ellipsisSize: NodeSize;
-    staticSize: NodeSize;
-}
-
-const initialState: TextEllipsisState = {
-    containerSize: initialNodeSize,
-    ellipsisSize: initialNodeSize,
-    staticSize: initialNodeSize,
-};
-
 const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
     const { children, tailLength, title, className } = props;
 
-    const containerRef = useRef<HTMLDivElement>(null);
-    const ellipsisTextRef = useRef<HTMLSpanElement>(null);
-    const staticTextRef = useRef<HTMLSpanElement>(null);
+    const [isTitleShown, setTitleShown] = useState(false);
 
-    const [state, setState] = useState(initialState);
+    const headRef = useRef<HTMLDivElement>(null);
 
-    const calculateSizes = useCallback(() => {
-        const containerNode = containerRef.current;
-        const ellipsisNode = ellipsisTextRef.current;
-        const staticNode = staticTextRef.current;
+    const onMouseEnter = useCallback(() => {
+        const headNode = headRef.current;
 
-        if (ellipsisNode && staticNode && containerNode) {
-            setState({
-                containerSize: {
-                    scrollWidth: containerNode.scrollWidth,
-                    clientWidth: containerNode.clientWidth,
-                },
-                ellipsisSize: {
-                    scrollWidth: ellipsisNode.scrollWidth,
-                    clientWidth: ellipsisNode.clientWidth,
-                },
-                staticSize: {
-                    scrollWidth: staticNode.scrollWidth,
-                    clientWidth: staticNode.clientWidth,
-                },
-            });
+        if (headNode) {
+            setTitleShown(headNode.clientWidth < headNode.scrollWidth);
         }
     }, []);
 
-    const targets = useMemo(() => {
-        return [containerRef, ellipsisTextRef, staticTextRef];
-    }, []);
-
-    useResizeObserver({
-        targets,
-        onResize: calculateSizes,
-    });
-
-    const isStaticTextEllipsis =
-        state.containerSize.clientWidth < state.staticSize.scrollWidth;
-    const isTitleShown =
-        state.ellipsisSize.scrollWidth > state.ellipsisSize.clientWidth ||
-        state.staticSize.scrollWidth > state.staticSize.clientWidth;
-
-    const { ellipsisText, staticText } = useMemo(() => {
+    const { headText, tailText } = useMemo(() => {
         const splitIndex = children.length - tailLength;
         return {
-            ellipsisText: children.substring(0, splitIndex),
-            staticText: children.substring(splitIndex),
+            headText: children.substring(0, splitIndex),
+            tailText: children.substring(splitIndex),
         };
     }, [children, tailLength]);
 
-    const classes = classNames(styles.container, className);
+    const classes = classNames(className, styles.container);
 
     return (
         <div
+            onMouseEnter={onMouseEnter}
             className={classes}
             title={isTitleShown ? title ?? children : undefined}
-            ref={containerRef}
         >
-            <span
-                className={classNames(styles.ellipsis, {
-                    [styles.hidden]: isStaticTextEllipsis,
-                })}
-                ref={ellipsisTextRef}
-            >
-                {ellipsisText}
-            </span>
-            <span
-                className={classNames(styles.static, {
-                    [styles.ellipsis]: isStaticTextEllipsis,
-                })}
-                ref={staticTextRef}
-            >
-                {staticText}
-            </span>
+            <div className={styles.innerContainer}>
+                <div
+                    className={classNames(styles.head, styles.ellipsis)}
+                    ref={headRef}
+                >
+                    {headText}
+                </div>
+                <div className={classNames(styles.tail, styles.ellipsis)}>
+                    {tailText}
+                </div>
+            </div>
         </div>
     );
 };

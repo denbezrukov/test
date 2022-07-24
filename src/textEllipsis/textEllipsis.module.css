@@ -1,7 +1,26 @@
 .container {
     display: flex;
     overflow: hidden;
-    width: 100%;
+}
+
+.innerContainer {
+    display: flex;
+    overflow: hidden;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+
+.head {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0;
+    min-width: 0;
+}
+
+.tail {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
 }
 
 .ellipsis {
@@ -10,20 +29,4 @@
     overflow: hidden;
     word-wrap: normal;
     overflow-wrap: normal;
-}
-
-.static {
-    white-space: nowrap;
-}
-
-.hidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
 }

@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Table } from '../table/table';
 
 import styles from './largeDatasetTable.module.css';
-import { FlexTextEllipsis } from '../flexTextEllipsis/flexTextEllipsis';
+import { TextEllipsis } from '../textEllipsis/textEllipsis';
 
 const longTextWithoutSpaces =
     'Loremipsumdolorsitamet,consecteturadipiscingelit.Nullaultricies.';
@@ -29,18 +29,18 @@ const LargeTableComponent = (props: Props) => {
                 <>
                     {data.map(key => {
                         return (
-                            <FlexTextEllipsis key={key} tailLength={20}>
+                            <TextEllipsis key={key} tailLength={20}>
                                 {longTextWithoutSpaces}
-                            </FlexTextEllipsis>
+                            </TextEllipsis>
                         );
                     })}
                 </>
                 <>
                     {data.map(key => {
                         return (
-                            <FlexTextEllipsis key={key} tailLength={20}>
+                            <TextEllipsis key={key} tailLength={20}>
                                 {longTextWithSpaces}
-                            </FlexTextEllipsis>
+                            </TextEllipsis>
                         );
                     })}
                 </>
