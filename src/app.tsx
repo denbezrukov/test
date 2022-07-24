@@ -1,7 +1,7 @@
 import { Table } from './table/table';
 
 import styles from './app.module.css';
-import { TextMiddleEllipsis } from './textMiddleEllipsis/textMiddleEllipsis';
+import { FlexTextEllipsis } from './flexTextEllipsis/flexTextEllipsis';
 
 const data = Array(10)
     .fill(123)
@@ -19,18 +19,18 @@ export const App = () => {
                 <>
                     {data.map(key => {
                         return (
-                            <TextMiddleEllipsis key={key}>
+                            <FlexTextEllipsis key={key} tailLength={10}>
                                 {longTextWithoutSpaces}
-                            </TextMiddleEllipsis>
+                            </FlexTextEllipsis>
                         );
                     })}
                 </>
                 <>
                     {data.map(key => {
                         return (
-                            <TextMiddleEllipsis key={key}>
+                            <FlexTextEllipsis key={key} tailLength={10}>
                                 {longTextWithSpaces}
-                            </TextMiddleEllipsis>
+                            </FlexTextEllipsis>
                         );
                     })}
                 </>

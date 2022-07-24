@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Table } from '../table/table';
-import { TextEllipsis } from '../textEllipsis/textEllipsis';
 
 import styles from './largeDatasetTable.module.css';
+import { FlexTextEllipsis } from '../flexTextEllipsis/flexTextEllipsis';
 
 const longTextWithoutSpaces =
     'Loremipsumdolorsitamet,consecteturadipiscingelit.Nullaultricies.';
@@ -29,18 +29,18 @@ const LargeTableComponent = (props: Props) => {
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis key={key} tailLength={20}>
+                            <FlexTextEllipsis key={key} tailLength={20}>
                                 {longTextWithoutSpaces}
-                            </TextEllipsis>
+                            </FlexTextEllipsis>
                         );
                     })}
                 </>
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis key={key} tailLength={20}>
+                            <FlexTextEllipsis key={key} tailLength={20}>
                                 {longTextWithSpaces}
-                            </TextEllipsis>
+                            </FlexTextEllipsis>
                         );
                     })}
                 </>

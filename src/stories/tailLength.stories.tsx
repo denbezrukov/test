@@ -1,8 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Table } from '../table/table';
-import { TextEllipsis } from '../textEllipsis/textEllipsis';
 
 import styles from './tailLength.module.css';
+import { FlexTextEllipsis } from '../flexTextEllipsis/flexTextEllipsis';
 
 interface Props {
     leftText: string;
@@ -22,7 +22,7 @@ const TailLengthComponent = (props: Props) => {
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis
+                            <FlexTextEllipsis
                                 key={key}
                                 className={
                                     key % 2 === 0 ? styles.even : styles.odd
@@ -30,14 +30,14 @@ const TailLengthComponent = (props: Props) => {
                                 tailLength={tailLength}
                             >
                                 {leftText}
-                            </TextEllipsis>
+                            </FlexTextEllipsis>
                         );
                     })}
                 </>
                 <>
                     {data.map(key => {
                         return (
-                            <TextEllipsis
+                            <FlexTextEllipsis
                                 key={key}
                                 className={
                                     key % 2 === 0 ? styles.odd : styles.even
@@ -45,7 +45,7 @@ const TailLengthComponent = (props: Props) => {
                                 tailLength={tailLength}
                             >
                                 {rightText}
-                            </TextEllipsis>
+                            </FlexTextEllipsis>
                         );
                     })}
                 </>
