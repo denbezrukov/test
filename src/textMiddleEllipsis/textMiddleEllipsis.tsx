@@ -1,7 +1,7 @@
 import { FC, memo, useCallback, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { useResizeObserver } from '../_hooks/useResizeObserver';
-import { useTruncateFromMiddle } from '../_hooks/useTruncateFromMiddle';
+import { useTextMiddleEllipsis } from '../_hooks/useTextMiddleEllipsis';
 import { useIsomorphicLayoutEffect } from '../_hooks/useIsomorphicLayoutEffect';
 
 import styles from './textMiddleEllipsis.module.css';
@@ -43,7 +43,7 @@ const TextMiddleEllipsisComponent: FC<TextEllipsisProps> = props => {
         }
     }, []);
 
-    const truncatedText = useTruncateFromMiddle({
+    const truncatedText = useTextMiddleEllipsis({
         text: children,
         width,
         font,

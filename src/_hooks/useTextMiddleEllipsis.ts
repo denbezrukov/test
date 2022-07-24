@@ -6,7 +6,7 @@ interface UseTruncateFromMiddleProps {
     width: number;
     font: string;
 }
-export const useTruncateFromMiddle = (props: UseTruncateFromMiddleProps) => {
+export const useTextMiddleEllipsis = (props: UseTruncateFromMiddleProps) => {
     const { text, width, font } = props;
 
     return useMemo(() => {
