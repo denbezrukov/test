@@ -73,5 +73,5 @@ TailLength.args = {
     rightText:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies.',
     tailLength: 20,
-    title: '',
+    title: 'some title',
 };
