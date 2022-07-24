@@ -36,9 +36,7 @@ describe('TextEllipsis', () => {
         expect(tailElement).toBeInTheDocument();
         expect(tailElement).toHaveTextContent(/^789$/);
 
-        rerender(
-            <TextEllipsis tailLength={10}>1234567891011</TextEllipsis>,
-        );
+        rerender(<TextEllipsis tailLength={10}>1234567891011</TextEllipsis>);
 
         expect(headElement).toBeInTheDocument();
         expect(headElement).toHaveTextContent(/^123$/);
@@ -48,9 +46,7 @@ describe('TextEllipsis', () => {
     });
 
     test('should have only head if tail length is 0', async () => {
-        render(
-            <TextEllipsis tailLength={0}>this is long text</TextEllipsis>,
-        );
+        render(<TextEllipsis tailLength={0}>this is long text</TextEllipsis>);
         const headElement = screen.getByTestId('text-ellipsis-head');
         const tailElement = screen.queryByTestId('text-ellipsis-tail');
 
@@ -60,9 +56,7 @@ describe('TextEllipsis', () => {
     });
 
     test('should have only tail if tail length is greater than text', async () => {
-        render(
-            <TextEllipsis tailLength={100}>this is long text</TextEllipsis>,
-        );
+        render(<TextEllipsis tailLength={100}>this is long text</TextEllipsis>);
         const headElement = screen.queryByTestId('text-ellipsis-head');
         const tailElement = screen.getByTestId('text-ellipsis-tail');
 
