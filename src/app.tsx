@@ -3,7 +3,7 @@ import { Table } from './table/table';
 import styles from './app.module.css';
 import { TextEllipsis } from './textEllipsis/textEllipsis';
 
-const data = Array(1)
+const data = Array(10)
     .fill(123)
     .map((_, index) => index);
 
