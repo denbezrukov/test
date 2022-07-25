@@ -20,7 +20,7 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
 
     const onMouseEnter = useCallback(() => {
         const headNode = headRef.current;
-        const tailNode = headRef.current;
+        const tailNode = tailRef.current;
 
         const isHeadOverflow = headNode
             ? headNode.clientWidth < headNode.scrollWidth
