@@ -22,10 +22,12 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
         const headNode = headRef.current;
         const tailNode = headRef.current;
 
-        const isHeadOverflow =
-            headNode && headNode.clientWidth < headNode.scrollWidth;
-        const isTailOverflow =
-            tailNode && tailNode.clientWidth < tailNode.scrollWidth;
+        const isHeadOverflow = headNode
+            ? headNode.clientWidth < headNode.scrollWidth
+            : false;
+        const isTailOverflow = tailNode
+            ? tailNode.clientWidth < tailNode.scrollWidth
+            : false;
 
         setTitleShown(isHeadOverflow || isTailOverflow);
     }, []);
