@@ -3,13 +3,6 @@
     overflow: hidden;
 }
 
-.innerContainer {
-    display: flex;
-    overflow: hidden;
-    flex-basis: auto;
-    flex-grow: 0;
-    flex-shrink: 1;
-}
 
 .head {
     flex-basis: 0;
@@ -30,4 +23,51 @@
     overflow: hidden;
     word-wrap: normal;
     overflow-wrap: normal;
+}
+
+.innerContainer {
+    display: flex;
+    overflow: hidden;
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 1;
+    position: relative;
+}
+
+.innerContainer::before {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    word-wrap: normal;
+    overflow-wrap: normal;
+    content: attr(data-head);
+
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.innerContainer::after {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    word-wrap: normal;
+    overflow-wrap: normal;
+    content: attr(data-tail);
+
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+
+.fake {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline;
+    color: transparent;
 }

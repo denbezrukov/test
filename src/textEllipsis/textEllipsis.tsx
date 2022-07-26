@@ -15,21 +15,16 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
 
     const [isTitleShown, setTitleShown] = useState(false);
 
-    const headRef = useRef<HTMLDivElement>(null);
-    const tailRef = useRef<HTMLDivElement>(null);
+    const fakeRef = useRef<HTMLDivElement>(null);
+    const innerContainerRef = useRef<HTMLDivElement>(null);
 
     const onMouseEnter = useCallback(() => {
-        const headNode = headRef.current;
-        const tailNode = tailRef.current;
+        const fakeNode = fakeRef.current;
+        const innerContainerNode = innerContainerRef.current;
 
-        const isHeadOverflow = headNode
-            ? headNode.clientWidth < headNode.scrollWidth
-            : false;
-        const isTailOverflow = tailNode
-            ? tailNode.clientWidth < tailNode.scrollWidth
-            : false;
-
-        setTitleShown(isHeadOverflow || isTailOverflow);
+        if (fakeNode && innerContainerNode) {
+            setTitleShown(fakeNode.scrollWidth > innerContainerNode.clientWidth)
+        }
     }, []);
 
     const { headText, tailText } = useMemo(() => {
@@ -49,25 +44,8 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
             title={isTitleShown ? title ?? children : undefined}
             onMouseEnter={onMouseEnter}
         >
-            <div className={styles.innerContainer}>
-                {headText && (
-                    <div
-                        data-testid="text-ellipsis-head"
-                        className={classNames(styles.head, styles.ellipsis)}
-                        ref={headRef}
-                    >
-                        {headText}
-                    </div>
-                )}
-                {tailText && (
-                    <div
-                        data-testid="text-ellipsis-tail"
-                        className={classNames(styles.tail, styles.ellipsis)}
-                        ref={tailRef}
-                    >
-                        {tailText}
-                    </div>
-                )}
+            <div ref={innerContainerRef} className={styles.innerContainer} data-head={headText} data-tail={tailText}>
+                <div ref={fakeRef} className={styles.fake}>{children}</div>
             </div>
         </div>
     );
