@@ -6,10 +6,15 @@
     align-items: center;
 }
 
-.odd {
+.gray {
     color: gray;
 }
 
-.even {
+.purple {
     color: mediumpurple;
+}
+
+.userSelectAll {
+    user-select: all;
+    -webkit-user-select: all;
 }

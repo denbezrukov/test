@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import classNames from 'classnames';
 import { Table } from '../table/table';
 
 import styles from './textEllipsis.module.css';
@@ -9,13 +10,14 @@ interface Props {
     rightText: string;
     tailLength: number;
     title: string;
+    isUserSelectAll: boolean;
 }
 const data = Array(20)
     .fill(1)
     .map((_, index) => index);
 
 const TextEllipsisComponent = (props: Props) => {
-    const { tailLength, leftText, rightText, title } = props;
+    const { tailLength, leftText, rightText, title, isUserSelectAll } = props;
 
     return (
         <div className={styles.container}>
@@ -25,9 +27,11 @@ const TextEllipsisComponent = (props: Props) => {
                         return (
                             <Text
                                 key={key}
-                                className={
-                                    key % 2 === 0 ? styles.even : styles.odd
-                                }
+                                className={classNames({
+                                    [styles.userSelectAll]: isUserSelectAll,
+                                    [styles.purple]: key % 2 === 0,
+                                    [styles.gray]: key % 2 !== 0,
+                                })}
                                 tailLength={tailLength}
                                 title={title}
                             >
@@ -41,9 +45,11 @@ const TextEllipsisComponent = (props: Props) => {
                         return (
                             <Text
                                 key={key}
-                                className={
-                                    key % 2 === 0 ? styles.odd : styles.even
-                                }
+                                className={classNames({
+                                    [styles.userSelectAll]: isUserSelectAll,
+                                    [styles.purple]: key % 2 !== 0,
+                                    [styles.gray]: key % 2 === 0,
+                                })}
                                 tailLength={tailLength}
                                 title={title}
                             >
@@ -74,4 +80,5 @@ TextEllipsis.args = {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies.',
     tailLength: 20,
     title: 'some title',
+    isUserSelectAll: false,
 };

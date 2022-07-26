@@ -45,7 +45,10 @@ describe('TextEllipsis', () => {
         const innerContainer = screen.getByTestId('text-ellipsis-inner');
 
         expect(innerContainer).toBeInTheDocument();
-        expect(innerContainer).toHaveAttribute('data-head', 'this is long text');
+        expect(innerContainer).toHaveAttribute(
+            'data-head',
+            'this is long text',
+        );
         expect(innerContainer).toHaveAttribute('data-tail', '');
     });
 
@@ -55,6 +58,9 @@ describe('TextEllipsis', () => {
 
         expect(innerContainer).toBeInTheDocument();
         expect(innerContainer).toHaveAttribute('data-head', '');
-        expect(innerContainer).toHaveAttribute('data-tail', 'this is long text');
+        expect(innerContainer).toHaveAttribute(
+            'data-tail',
+            'this is long text',
+        );
     });
 });
