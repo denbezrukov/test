@@ -3,44 +3,22 @@
     overflow: hidden;
 }
 
-
-.head {
-    flex-basis: 0;
-    flex-grow: 1;
-    flex-shrink: 0;
-    min-width: 0;
-}
-
-.tail {
-    flex-basis: auto;
-    flex-grow: 0;
-    flex-shrink: 1;
-}
-
-.ellipsis {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    word-wrap: normal;
-    overflow-wrap: normal;
-}
-
 .innerContainer {
     display: flex;
+    position: relative;
     overflow: hidden;
     flex-basis: auto;
     flex-grow: 0;
     flex-shrink: 1;
-    position: relative;
 }
 
 .innerContainer::before {
+    content: attr(data-head);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     word-wrap: normal;
     overflow-wrap: normal;
-    content: attr(data-head);
 
     flex-basis: 0;
     flex-grow: 1;
@@ -49,19 +27,19 @@
 }
 
 .innerContainer::after {
+    content: attr(data-tail);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     word-wrap: normal;
     overflow-wrap: normal;
-    content: attr(data-tail);
 
     flex-basis: auto;
     flex-grow: 0;
     flex-shrink: 1;
 }
 
-.fake {
+.hiddenText {
     position: absolute;
     left: 0;
     top: 0;

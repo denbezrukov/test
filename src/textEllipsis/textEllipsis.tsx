@@ -15,15 +15,17 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
 
     const [isTitleShown, setTitleShown] = useState(false);
 
-    const fakeRef = useRef<HTMLDivElement>(null);
+    const hiddenTextRef = useRef<HTMLDivElement>(null);
     const innerContainerRef = useRef<HTMLDivElement>(null);
 
     const onMouseEnter = useCallback(() => {
-        const fakeNode = fakeRef.current;
+        const hiddenTextNode = hiddenTextRef.current;
         const innerContainerNode = innerContainerRef.current;
 
-        if (fakeNode && innerContainerNode) {
-            setTitleShown(fakeNode.scrollWidth > innerContainerNode.clientWidth)
+        if (hiddenTextNode && innerContainerNode) {
+            setTitleShown(
+                hiddenTextNode.scrollWidth > innerContainerNode.clientWidth,
+            );
         }
     }, []);
 
@@ -44,8 +46,16 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
             title={isTitleShown ? title ?? children : undefined}
             onMouseEnter={onMouseEnter}
         >
-            <div ref={innerContainerRef} className={styles.innerContainer} data-head={headText} data-tail={tailText}>
-                <div ref={fakeRef} className={styles.fake}>{children}</div>
+            <div
+                data-testid="text-ellipsis-inner"
+                ref={innerContainerRef}
+                className={styles.innerContainer}
+                data-head={headText}
+                data-tail={tailText}
+            >
+                <div ref={hiddenTextRef} className={styles.hiddenText}>
+                    {children}
+                </div>
             </div>
         </div>
     );
