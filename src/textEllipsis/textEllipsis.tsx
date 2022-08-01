@@ -1,4 +1,4 @@
-import { FC, memo, useCallback, useMemo, useRef, useState } from 'react';
+import { FC, memo, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 import styles from './textEllipsis.module.css';
@@ -18,7 +18,7 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
     const hiddenTextRef = useRef<HTMLDivElement>(null);
     const innerContainerRef = useRef<HTMLDivElement>(null);
 
-    const onMouseEnter = useCallback(() => {
+    const onMouseEnter = () => {
         const hiddenTextNode = hiddenTextRef.current;
         const innerContainerNode = innerContainerRef.current;
 
@@ -27,7 +27,7 @@ const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
                 hiddenTextNode.scrollWidth > innerContainerNode.clientWidth,
             );
         }
-    }, []);
+    };
 
     const { headText, tailText } = useMemo(() => {
         const splitIndex = children.length - tailLength;
