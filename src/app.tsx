@@ -15,7 +15,6 @@ const longTextWithSpaces =
 export const App = () => {
     return (
         <div className={styles.container}>
-            <button>123</button>
             <Table>
                 <>
                     {data.map(key => {
