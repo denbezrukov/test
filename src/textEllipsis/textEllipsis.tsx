@@ -13,6 +13,8 @@ export interface TextEllipsisProps {
 const TextEllipsisComponent: FC<TextEllipsisProps> = props => {
     const { children, tailLength, title, className } = props;
 
+    undefined();
+
     const [isTitleShown, setTitleShown] = useState(false);
 
     const hiddenTextRef = useRef<HTMLDivElement>(null);
