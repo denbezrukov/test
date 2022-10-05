@@ -13,7 +13,8 @@ const longTextWithSpaces =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies.';
 
 export const App = () => {
-    undefined();
+    undefined
+    ()
     return (
         <div className={styles.container}>
             <Table>
