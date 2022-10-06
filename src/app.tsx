@@ -10,9 +10,13 @@ const data = Array(10)
 const longTextWithoutSpaces =
     'Loremipsumdolorsitamet,consecteturadipiscingelit.Nullaultricies.';
 const longTextWithSpaces =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies.';
+
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies.'
+    ;
 
 export const App = () => {
+    undefined
+    ()
     return (
         <div className={styles.container}>
             <Table>
